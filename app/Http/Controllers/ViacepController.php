@@ -4,21 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Facades\ApiViacep;
+use App\Http\Resources\ViacepResource;
+use Helper;
 
 class ViacepController extends Controller
 {
-    public function show(string $cep, string $formatResponse = 'json')
+    /**
+     * Query information about a ZIP code using the ViaCEP API.
+     *
+     * @param string $cep ZIP code to be consulted.
+     * @return ViacepResource Returns standardized postal code data or error message.
+     */
+    public function show(string $cep): ViacepResource
     {
-        // Validate the CEP format
-        // if (!preg_match('/^\d{5}-?\d{3}$/', $cep)) {
-        //     return response()->json(['error' => 'Invalid CEP format'], 400);
-        // }
+        if (!Helper::isValidCep($cep)) {
+            return new ViacepResource([
+                'erro' => true,
+                'mensagem' => 'CEP inválido!'
+            ]);
+        }
 
-        // Remove any non-numeric characters from the CEP
-        // $cep = preg_replace('/\D/', '', $cep);
+        try {
+            $response = ApiViacep::get("$cep/json")->json();
 
-        // Call the ViaCEP API
+            if (isset($response['erro'])) {
+                return new ViacepResource([
+                    'erro' => true,
+                    'mensagem' => 'CEP de formato válido, porém inexistente!'
+                ]);
+            }
 
-        return ApiViacep::get("$cep/$formatResponse")->json();
+            return new ViacepResource($response);
+        } catch (\Exception $e) {
+            return new ViacepResource([
+                'erro' => true,
+                'mensagem' => 'Erro ao buscar CEP: ' . $e->getMessage()
+            ]);
+        }
     }
 }

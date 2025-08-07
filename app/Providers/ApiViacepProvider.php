@@ -16,7 +16,6 @@ class ApiViacepProvider extends ServiceProvider
             return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ',
             ])
             ->withOptions([
                 'verify' => false,
