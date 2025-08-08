@@ -7,7 +7,7 @@ use App\Facades\ApiViacep;
 use App\Http\Resources\ViacepResource;
 use Helper;
 
-class ViacepController extends Controller
+class ViacepController
 {
     /**
      * Query information about a ZIP code using the ViaCEP API.

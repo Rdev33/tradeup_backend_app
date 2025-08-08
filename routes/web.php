@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/* Disable: Route::get('/', function () {
-    return view('welcome');
+/* Route::get('/', function () {
+    return 'View disabled for this route.';
 }); */
