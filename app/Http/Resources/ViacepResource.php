@@ -26,8 +26,8 @@ class ViacepResource extends JsonResource
             'Regiao' => $this->resource['regiao'] ?? null,
             'IBGE' => $this->resource['ibge'] ?? null,
             'DDD' => $this->resource['ddd'] ?? null,
-            'error' => $this->resource['erro'] ?? false,
-            'message' => $this->resource['mensagem'] ?? null,
+            'erro' => $this->resource['erro'] ?? false,
+            'mensagem' => $this->resource['mensagem'] ?? null,
         ];
     }
 }
