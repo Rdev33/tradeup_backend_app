@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Facades\ApiViacep;
 use App\Http\Resources\ViacepResource;
 use Helper;
